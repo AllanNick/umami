@@ -12,10 +12,11 @@ import { startOfMonth, endOfMonth } from 'date-fns';
 import Icons from 'components/icons';
 import { useLocale } from 'components/hooks';
 import { formatDate } from 'lib/date';
+import { getDateLocale } from 'lib/lang';
 import styles from './MonthSelect.module.css';
 
 export function MonthSelect({ date = new Date(), onChange }) {
-  const { locale, dateLocale } = useLocale();
+  const { locale } = useLocale();
   const month = formatDate(date, 'MMMM', locale);
   const year = date.getFullYear();
   const ref = useRef();
@@ -39,7 +40,7 @@ export function MonthSelect({ date = new Date(), onChange }) {
             {close => (
               <CalendarMonthSelect
                 date={date}
-                locale={dateLocale}
+                locale={getDateLocale(locale)}
                 onSelect={handleChange.bind(null, close)}
               />
             )}
@@ -56,7 +57,7 @@ export function MonthSelect({ date = new Date(), onChange }) {
             {close => (
               <CalendarYearSelect
                 date={date}
-                locale={dateLocale}
+                locale={getDateLocale(locale)}
                 onSelect={handleChange.bind(null, close)}
               />
             )}

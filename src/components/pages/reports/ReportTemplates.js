@@ -9,8 +9,6 @@ import styles from './ReportTemplates.module.css';
 import { useMessages } from 'components/hooks';
 
 function ReportItem({ title, description, url, icon }) {
-  const { formatMessage, labels } = useMessages();
-
   return (
     <div className={styles.report}>
       <div className={styles.title}>
@@ -24,7 +22,7 @@ function ReportItem({ title, description, url, icon }) {
             <Icon>
               <Icons.Plus />
             </Icon>
-            <Text>{formatMessage(labels.create)}</Text>
+            <Text>Create</Text>
           </Button>
         </Link>
       </div>
@@ -38,19 +36,19 @@ export function ReportTemplates({ showHeader = true }) {
   const reports = [
     {
       title: formatMessage(labels.insights),
-      description: formatMessage(labels.insightsDescription),
+      description: 'Dive deeper into your data by using segments and filters.',
       url: '/reports/insights',
       icon: <Lightbulb />,
     },
     {
       title: formatMessage(labels.funnel),
-      description: formatMessage(labels.funnelDescription),
+      description: 'Understand the conversion and drop-off rate of users.',
       url: '/reports/funnel',
       icon: <Funnel />,
     },
     {
       title: formatMessage(labels.retention),
-      description: formatMessage(labels.retentionDescription),
+      description: 'Measure you website stickiness by tracking how often users return.',
       url: '/reports/retention',
       icon: <Magnet />,
     },

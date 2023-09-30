@@ -38,7 +38,7 @@ export default async (
     const data = await getReportsByWebsiteId(websiteId, {
       page,
       filter,
-      pageSize: +pageSize || undefined,
+      pageSize: +pageSize || null,
     });
 
     return ok(res, data);

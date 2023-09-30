@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Button, ButtonGroup, Calendar } from 'react-basics';
-import { isAfter, isBefore, isSameDay, startOfDay, endOfDay } from 'date-fns';
+import { isAfter, isBefore, isSameDay } from 'date-fns';
 import useLocale from 'components/hooks/useLocale';
+import { getDateLocale } from 'lib/lang';
 import { FILTER_DAY, FILTER_RANGE } from 'lib/constants';
 import useMessages from 'components/hooks/useMessages';
 import styles from './DatePickerForm.module.css';
@@ -20,7 +21,7 @@ export function DatePickerForm({
   const [singleDate, setSingleDate] = useState(defaultStartDate);
   const [startDate, setStartDate] = useState(defaultStartDate);
   const [endDate, setEndDate] = useState(defaultEndDate);
-  const { dateLocale } = useLocale();
+  const { locale } = useLocale();
   const { formatMessage, labels } = useMessages();
 
   const disabled =
@@ -30,9 +31,9 @@ export function DatePickerForm({
 
   const handleSave = () => {
     if (selected === FILTER_DAY) {
-      onChange(`range:${startOfDay(singleDate).getTime()}:${endOfDay(singleDate).getTime()}`);
+      onChange(`range:${singleDate.getTime()}:${singleDate.getTime()}`);
     } else {
-      onChange(`range:${startOfDay(startDate).getTime()}:${endOfDay(endDate).getTime()}`);
+      onChange(`range:${startDate.getTime()}:${endDate.getTime()}`);
     }
   };
 
@@ -50,7 +51,6 @@ export function DatePickerForm({
             date={singleDate}
             minDate={minDate}
             maxDate={maxDate}
-            locale={dateLocale}
             onChange={setSingleDate}
           />
         )}
@@ -60,14 +60,14 @@ export function DatePickerForm({
               date={startDate}
               minDate={minDate}
               maxDate={endDate}
-              locale={dateLocale}
+              locale={getDateLocale(locale)}
               onChange={setStartDate}
             />
             <Calendar
               date={endDate}
               minDate={startDate}
               maxDate={maxDate}
-              locale={dateLocale}
+              locale={getDateLocale(locale)}
               onChange={setEndDate}
             />
           </>

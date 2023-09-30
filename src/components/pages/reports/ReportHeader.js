@@ -20,7 +20,6 @@ export function ReportHeader({ icon }) {
 
   const { name, description, parameters } = report || {};
   const { websiteId, dateRange } = parameters || {};
-  const defaultName = formatMessage(labels.untitled);
 
   const handleSave = async () => {
     if (!report.id) {
@@ -40,7 +39,7 @@ export function ReportHeader({ icon }) {
   };
 
   const handleNameChange = name => {
-    updateReport({ name: name || defaultName });
+    updateReport({ name: name || 'Untitled' });
   };
 
   const handleDescriptionChange = description => {
@@ -55,7 +54,7 @@ export function ReportHeader({ icon }) {
           key={name}
           name="name"
           value={name}
-          placeholder={defaultName}
+          placeholder={formatMessage(labels.untitled)}
           onCommit={handleNameChange}
         />
       </>

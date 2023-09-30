@@ -3,9 +3,8 @@ import { useRouter } from 'next/router';
 import Icons from 'components/icons';
 import useMessages from 'components/hooks/useMessages';
 import useUser from 'components/hooks/useUser';
-import useLocale from 'components/hooks/useLocale';
-import { CURRENT_VERSION } from 'lib/constants';
 import styles from './ProfileButton.module.css';
+import useLocale from 'components/hooks/useLocale';
 
 export function ProfileButton() {
   const { formatMessage, labels } = useMessages();
@@ -52,7 +51,6 @@ export function ProfileButton() {
               <Text>{formatMessage(labels.logout)}</Text>
             </Item>
           )}
-          <div className={styles.version}>{`v${CURRENT_VERSION}`}</div>
         </Menu>
       </Popup>
     </PopupTrigger>

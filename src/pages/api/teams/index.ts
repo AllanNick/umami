@@ -41,11 +41,7 @@ export default async (
   if (req.method === 'GET') {
     const { page, filter, pageSize } = req.query;
 
-    const results = await getTeamsByUserId(userId, {
-      page,
-      filter,
-      pageSize: +pageSize || undefined,
-    });
+    const results = await getTeamsByUserId(userId, { page, filter, pageSize: +pageSize || null });
 
     return ok(res, results);
   }

@@ -49,7 +49,7 @@ export default async (
     const websites = await getWebsitesByTeamId(teamId, {
       page,
       filter,
-      pageSize: +pageSize || undefined,
+      pageSize: +pageSize || null,
     });
 
     return ok(res, websites);

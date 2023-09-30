@@ -78,9 +78,7 @@ export function parseDateRange(value, locale = 'en-US') {
     const endDate = new Date(+endTime);
 
     return {
-      startDate,
-      endDate,
-      unit: getMinimumUnit(startDate, endDate),
+      ...getDateRangeValues(startDate, endDate),
       value,
     };
   }
@@ -255,6 +253,14 @@ export function getMinimumUnit(startDate, endDate) {
   }
 
   return 'year';
+}
+
+export function getDateRangeValues(startDate, endDate) {
+  return {
+    startDate: startOfDay(startDate),
+    endDate: endOfDay(endDate),
+    unit: getMinimumUnit(startDate, endDate),
+  };
 }
 
 export function getDateFromString(str) {

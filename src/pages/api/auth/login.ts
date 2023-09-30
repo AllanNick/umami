@@ -52,18 +52,17 @@ export default async (
     const user = await getUserByUsername(username, { includePassword: true });
 
     if (user && checkPassword(password, user.password)) {
-      if (redis) {
+      if (redis.enabled) {
         const token = await setAuthKey(user);
 
         return ok(res, { token, user });
       }
 
       const token = createSecureToken({ userId: user.id }, secret());
-      const { id, username, role, createdAt } = user;
 
       return ok(res, {
         token,
-        user: { id, username, role, createdAt },
+        user: { id: user.id, username: user.username, role: user.role, createdAt: user.createdAt },
       });
     }
 

@@ -8,7 +8,6 @@ import { ISO_COUNTRIES, MAP_FILE } from 'lib/constants';
 import useTheme from 'components/hooks/useTheme';
 import useCountryNames from 'components/hooks/useCountryNames';
 import useLocale from 'components/hooks/useLocale';
-import useMessages from 'components/hooks/useMessages';
 import { formatLongNumber } from 'lib/format';
 import { percentFilter } from 'lib/filters';
 import styles from './WorldMap.module.css';
@@ -18,9 +17,7 @@ export function WorldMap({ data, className }) {
   const [tooltip, setTooltipPopup] = useState();
   const { theme, colors } = useTheme();
   const { locale } = useLocale();
-  const { formatMessage, labels } = useMessages();
   const countryNames = useCountryNames(locale);
-  const visitorsLabel = formatMessage(labels.visitors).toLocaleLowerCase(locale);
   const metrics = useMemo(() => (data ? percentFilter(data) : []), [data]);
 
   function getFillColor(code) {
@@ -43,7 +40,7 @@ export function WorldMap({ data, className }) {
   function handleHover(code) {
     if (code === 'AQ') return;
     const country = metrics?.find(({ x }) => x === code);
-    setTooltipPopup(`${countryNames[code]}: ${formatLongNumber(country?.y || 0)} ${visitorsLabel}`);
+    setTooltipPopup(`${countryNames[code]}: ${formatLongNumber(country?.y || 0)} visitors`);
   }
 
   return (

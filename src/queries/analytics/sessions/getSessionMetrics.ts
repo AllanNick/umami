@@ -31,7 +31,7 @@ async function relationalQuery(websiteId: string, column: string, filters: Query
     `
     select 
       ${column} x,
-      count(distinct website_event.session_id) y
+      count(*) y
       ${includeCountry ? ', country' : ''}
     from website_event
     ${joinSession}

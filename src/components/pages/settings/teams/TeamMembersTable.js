@@ -29,9 +29,7 @@ export function TeamMembersTable({
     }
     if (key === 'role') {
       return formatMessage(
-        labels[
-          Object.keys(ROLES).find(key => ROLES[key] === row?.teamUser[0]?.role) || labels.unknown
-        ],
+        labels[Object.keys(ROLES).find(key => ROLES[key] === row.role) || labels.unknown],
       );
     }
     return data[key];
